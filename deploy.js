@@ -43,6 +43,7 @@ const deploy = async () => {
                                 });
 
     // result.catch((err)=>{console.log(err)});
+    console.log(interface);
     console.log('Contract Deployed To', result.options.address);
 };
 

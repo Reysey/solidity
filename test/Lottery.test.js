@@ -38,7 +38,7 @@ describe('Lottery', () => {
     it('allows one account to enter', async () => {
         await lottery.methods.enter().send({
             from: accounts[0],
-            value: web3.utils.toWei('0.02', 'ether')
+            value: web3.utils.toWei('0.01', 'ether')
         });
 
         const players = await lottery.methods.getPlayers().call({
@@ -52,17 +52,17 @@ describe('Lottery', () => {
     it('allows multiple account to enter', async () => {
         await lottery.methods.enter().send({
             from: accounts[0],
-            value: web3.utils.toWei('0.02', 'ether')
+            value: web3.utils.toWei('0.01  ', 'ether')
         });
 
         await lottery.methods.enter().send({
             from: accounts[1],
-            value: web3.utils.toWei('0.02', 'ether')
+            value: web3.utils.toWei('0.01', 'ether')
         });
 
         await lottery.methods.enter().send({
             from: accounts[2],
-            value: web3.utils.toWei('0.02', 'ether')
+            value: web3.utils.toWei('0.01', 'ether')
         });
 
         const players = await lottery.methods.getPlayers().call({
@@ -124,29 +124,6 @@ describe('Lottery', () => {
 
 
 // INFURA END POINT: https://rinkeby.infura.io/v3/080f8488d0094b8993d9a1b63c5a3bce
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* ganache Accounts
     [

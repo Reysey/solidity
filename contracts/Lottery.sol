@@ -10,6 +10,8 @@ contract Lottery{
     }
 
     function enter()    public payable {
+
+        // console.log("On Enter Function Call");
         require(msg.value > .01 ether);
 
         players.push(msg.sender);
@@ -23,7 +25,7 @@ contract Lottery{
         uint index = random() % players.length;
         players[index].transfer(this.balance);
         // RESET PLAYERS ARRAY
-        players = new address[](0);
+        players = new address[](0); 
     }
 
     modifier restricted(){
