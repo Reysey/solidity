@@ -1,10 +1,9 @@
-import web3 from './web3';
+import web3 from './web3js';
 import CampaignFactory from './build/CampaignFactory.json';
 
-const instance = new web3.eth.Contract(JSON.parse(CampaignFactory.interface),'0xb058afa7490BB081B0d17eA8b0e3850e2747B569');
-
-console.log("##############################################");
-console.log("#--------------------------------------------#");
-console.log(instance);
+const instance = new web3.eth.Contract(JSON.parse(CampaignFactory.interface),'0x7670d103e2f8eA60bc13AEC254e69eaceB7A2818');
+const accounts = web3.eth.getAccounts().then().catch();
+console.log("ACCOUNTS");
+console.log(accounts);
 
 export default instance;
