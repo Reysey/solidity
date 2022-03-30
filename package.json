@@ -6,8 +6,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha --timeout 10000",
-    "dev": "node server.js"
+    "test"    : "mocha --timeout 10000",
+    "dev"     : "node server.js",
+    "deployC" : "node ethereum/deploy.js"
   },
   "repository": {
     "type": "git",

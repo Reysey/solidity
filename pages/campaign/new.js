@@ -26,7 +26,6 @@ class CampaignNew extends Component {
                 .send({
                     from: accounts[0]
                 });
-            console.log("ROUTE");
             Router.pushRoute('/');
         }catch (err){
             // ON ERROR

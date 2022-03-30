@@ -95,12 +95,7 @@ contract Campaign{
         request.complete = true;
     }
 
-    function getSummary() public view
-    returns(uint, uint, uint, uint, address) {
-        // CONTRACT BALLANCE
-        // MINIMUM CONTRIBUTION
-        // REQUEST COUNT
-        // CONTRIBUTORS NUMBER
+    function getSummary() public view returns(uint, uint, uint, uint, address) {
         return (
             minimumContribution,
             this.balance,
@@ -110,7 +105,7 @@ contract Campaign{
         );
     }
 
-    function getRequestsCount() public view returns (uint) {
+    function getRequestsCount() public view returns (uint256) {
         return requests.length;
     }
 
