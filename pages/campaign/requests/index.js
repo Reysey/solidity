@@ -10,9 +10,10 @@ import RequestRow from "../../../components/RequestRow";
 class RequestIndex extends Component {
 
     static async getInitialProps(props){
-        const {address} = props.query;
-        const campaign = Campaign(address);
-        const requestCount = await campaign.methods.getRequestsCount().call();
+        const {address}         = props.query;
+        const campaign          = Campaign(address);
+        const requestCount      = await campaign.methods.getRequestsCount().call();
+        const approversCount    = await campaign.methods.approversCount().call();
 
         const requests = await Promise.all(
             Array(requestCount)
@@ -22,24 +23,30 @@ class RequestIndex extends Component {
 
         console.log(requests);
 
-        return {address, requests, requestCount};
+        return {address, requests, requestCount, approversCount, campaign};
     }
 
     renderRows(){
         try{
-
+            console.log(this.props.requests);
             return this.props.requests.map((request, index) => {
-                console.log("%c"+request,CustomStyles.info);
-                return (<RequestRow key={index} request={request} address={this.props.address}/>);
+                console.log("%c",request,CustomStyles.info);
+                return (
+                    <RequestRow
+                        key={index}
+                        id={index}
+                        request={request}
+                        address={this.props.address}
+                        approversCount={this.props.approversCount}
+                    />
+                );
             });
-
         }catch (e) {
             console.log("%c"+e.message, CustomStyles.error);
         }
     }
 
     render(){
-
         const {
             Header,
             Row,
@@ -54,7 +61,7 @@ class RequestIndex extends Component {
                 <h3>Requests</h3>
                 <Link route={`/campaign/${this.props.address}/requests/new`}>
                     <a>
-                        <Button primary>
+                        <Button primary floated="right" style={{marginBottom:10}}>
                             Add Request
                         </Button>
                     </a>
@@ -78,6 +85,7 @@ class RequestIndex extends Component {
                     </Body>
 
                 </Table>
+                <div>Found [{this.props.requestCount}] Requests.</div>
 
             </Layout>
         );
