@@ -25,6 +25,7 @@ if(typeof window !== 'undefined'){
         console.log("%cWEB3 IS PRESENT", "font-weight:900;color:red;");
         console.log("%cWEB3 IS PRESENT", "font-weight:900;color:red;");
         console.log("%cWEB3 IS PRESENT", "font-weight:900;color:red;");
+        console.log("%cWEB3 IS PRESENT", "font-weight:900;color:red;");
         web3 = new Web3(window.ethereum);
     }
     else {

@@ -10,27 +10,34 @@ import RequestRow from "../../../components/RequestRow";
 class RequestIndex extends Component {
 
     static async getInitialProps(props){
-        const {address}         = props.query;
-        const campaign          = Campaign(address);
-        const requestCount      = await campaign.methods.getRequestsCount().call();
-        const approversCount    = await campaign.methods.approversCount().call();
+        try{
+                const {address}         = props.query;
+                const campaign          = Campaign(address);
+                const requestCount      = await campaign.methods.getRequestsCount().call();
+                const approversCount    = await campaign.methods.approversCount().call();
+                const requests          = await Promise.all(
+                                            await Array(parseInt(requestCount.toString()))
+                                                .fill()
+                                                .map( async (element, index) => {
+                                                    return await campaign.methods.requests(index).call()
+                                                })
+                                        );
 
-        const requests = await Promise.all(
-            Array(requestCount)
-                .fill()
-                .map((element, index) => {return campaign.methods.requests(index).call()})
-        );
 
-        console.log(requests);
+                console.log(requests);
 
-        return {address, requests, requestCount, approversCount, campaign};
+                return {address, requestCount, approversCount, campaign, requests};
+        }catch (e){
+            console.log("%c"+e.message,CustomStyles.error);
+        }
     }
 
     renderRows(){
         try{
+            console.log(this);
+            console.log(this.props);
             console.log(this.props.requests);
             return this.props.requests.map((request, index) => {
-                console.log("%c",request,CustomStyles.info);
                 return (
                     <RequestRow
                         key={index}
